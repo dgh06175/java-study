@@ -7,8 +7,11 @@ public class VariableScopeExample {
 		if (v1 > 10){
 			int v2 = v1 - 10;
 		}
-//		int v3 = v1 + v2 + 5;
-		System.out.println(v1);
+		int x = 1;
+		int y = 2;
+		double result = (double) x / y;
+		String str = String.valueOf(result);
+		System.out.println(str);
 	}
 
 }
