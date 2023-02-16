@@ -1,6 +1,6 @@
 package chap06;
 
-public class Student {
+public class Student1 {
 	String name = new String("이상현");
 	int ban = 6; // 반
 	int no = 31; // 번호
