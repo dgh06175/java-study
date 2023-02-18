@@ -7,7 +7,7 @@ public class Bridge {
 	private int len;
 	
 	public Bridge() {
-		this.len = 3;
+		setBridgeLength(3);
 		for(int i=0; i<this.len; i++) {
 			double r = Math.random();
 			if (r >= 0.5) {
@@ -19,7 +19,7 @@ public class Bridge {
 	}
 	
 	public Bridge(int len) {
-		this.len = len;
+		setBridgeLength(3);
 		for(int i=0; i<this.len; i++) {
 			double r = Math.random();
 			if (r >= 0.5) {
