@@ -13,7 +13,7 @@ public class CarExample {
 				break;
 			case 2:
 				System.out.println("앞오른쪽 KumhoTire로 교체");
-				car.frontRightTire = new KumhoTire("앞오른쪽", 13);
+				car.frontRightTire = new KumhoTire("앞오른쪽", 13); // 형은 부모꺼지만 실질적인 호출은 자식 꺼
 				break;
 			case 3:
 				System.out.println("뒤왼쪽 HankookTire로 교체");
