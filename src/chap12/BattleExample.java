@@ -1,5 +1,6 @@
 package chap12;
 
+
 public class BattleExample {
 	public static void main(String[] args) {
 		Thread tanker = new Party.Tanker();

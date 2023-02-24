@@ -1,5 +1,6 @@
 package chap12;
 
+
 public class Party {
 	static class Tanker extends Thread{
 		String[] action = {"방어", "방패공격", "도발"};
