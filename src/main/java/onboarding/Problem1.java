@@ -6,7 +6,7 @@ class Problem1 {
     public static int solution(List<Integer> pobi, List<Integer> crong) {
         int answer = Integer.MAX_VALUE;
 
-        if (!validate(pobi) || !validate(crong)) {
+        if (validatePages(pobi) || validatePages(crong)) {
             return -1;
         }
 
@@ -51,8 +51,9 @@ class Problem1 {
         return ans;
     }
 
-    private static boolean validate(List<Integer> name) {
-        if (name.get(0) + 1 != name.get(1)) return false;
-        return name.get(0) >= 0;
+    private static boolean validatePages(List<Integer> name) {
+        if (name.get(0) + 1 != name.get(1)) return true;
+        if (name.get(0) < 0) return true;
+        return false;
     }
 }
