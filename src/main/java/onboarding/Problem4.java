@@ -1,22 +1,21 @@
 package onboarding;
 
 public class Problem4 {
+    static String alpha = "abcdefghijklmnopqrstuvwxyz";
+
     public static String solution(String word) {
         StringBuilder answer = new StringBuilder();
-        String alpha = "abcdefghijklmnopqrstuvwxyz";
-        int len = alpha.length() - 1;
-        System.out.println(len);
         for (int i = 0; i < word.length(); i++) {
-            boolean isUpper = Character.isUpperCase(word.charAt(i));
-            int index = alpha.indexOf(Character.toLowerCase(word.charAt(i)));
-            if (index == -1) {
-                answer.append(" ");
-                continue;
-            }
-            if (isUpper) answer.append(Character.toUpperCase(alpha.charAt(len - index)));
-            else answer.append(alpha.charAt(len - index));
+            answer.append(getReverseChar(word.charAt(i)));
         }
-
         return answer.toString();
+    }
+
+    private static Character getReverseChar(Character w)
+    {
+        if (!Character.isAlphabetic(w)) return w;
+        int reverseIndex = alpha.length() - 1 - alpha.indexOf(Character.toLowerCase(w));
+        if (Character.isUpperCase(w)) return Character.toUpperCase(alpha.charAt(reverseIndex));
+        return alpha.charAt(reverseIndex);
     }
 }
