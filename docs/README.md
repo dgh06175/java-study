@@ -187,3 +187,13 @@ public int method(String p1) { ... }
 ### Javadoc 을 어디에 써야하는가
 
 - 모든 public class에 쓰이고, 그 클래스의 public, protected 멤버에 쓰인다. (너무 간단한 경우 제외)
+
+
+## 자바 기본 문법
+
+### 배열과 Array와 List와 ArrayList
+
+### Integer vs int
+
+### 문자열 다루기
+
