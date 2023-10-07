@@ -219,9 +219,33 @@ int[] score2;
 
 **배열 형식대로 문자열로 바꾸기**
 
-`Arrays.toString(배열이름)`
+`Arrays.toString(배열이름)` (import java.util.*) <br>
 -> 배열 `{ 100, 95 }`를 `"[100, 95]"` 문자열로 바꾼다.
-    
+
+**println**
+
+char 배열은 바로 출력해도 문자들만 출력된다.
+```java
+char[] chArr = { 'a', 'b', 'c', 'd' };
+Sysyem.out.println(chArr);
+// abcd 출력됨
+```
+
+**배열 복사**
+
+```java
+int[] num = { 1, 2, 3 };
+int[] newNum = new int[num.length];
+System.arraycopy(num, 0, newNum, 0, num.length);
+// num[0] 에서 newNum[0] 으로 num.length 개의 데이터를 복사
+```
+
+
+### 랜덤
+
+`Math.random()` -> 0.0 이상, 1.0 미만의 숫자 반환
+
+`(int)(Math.random() * m) + n` -> n 부터 m 까지의 정수 반환
 
 ### Integer vs int
 
