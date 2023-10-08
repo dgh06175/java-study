@@ -240,12 +240,18 @@ System.arraycopy(num, 0, newNum, 0, num.length);
 // num[0] 에서 newNum[0] 으로 num.length 개의 데이터를 복사
 ```
 
-
 ### 랜덤
 
 `Math.random()` -> 0.0 이상, 1.0 미만의 숫자 반환
 
 `(int)(Math.random() * m) + n` -> n 부터 m 까지의 정수 반환
+
+### 컬렉션 (Collection)
+https://velog.io/@dgh06175/Java-Collection-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC
+
+블로그에 저장했습니다.
+
+
 
 ### Integer vs int
 
