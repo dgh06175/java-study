@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BaseballGame {
-    private final List<Integer> computerNumber = new ArrayList<>(3);
+    private final List<Integer> computerNumber;
     private final List<Integer> userNumber = new ArrayList<>(3);
 
     BaseballGame() {
         System.out.println("숫자 야구 게임을 시작합니다.");
-        initComputerNumber();
+        computerNumber = initComputerNumber();
         System.out.println(computerNumber);
     }
 
@@ -21,11 +21,12 @@ public class BaseballGame {
     /**
      * 컴퓨터의 숫자를 초기화하는 함수
      */
-    private void initComputerNumber() {
-        computerNumber.clear();
+    public List<Integer> initComputerNumber() {
+        List<Integer> generatedNumber = new ArrayList<>(3);
         for (int i = 0; i < 3; i++) {
-            computerNumber.add((int)(Math.random() * 9 + 1));
+            generatedNumber.add((int)(Math.random() * 9 + 1));
         }
+        return generatedNumber;
     }
 
     /**
