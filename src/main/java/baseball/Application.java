@@ -9,7 +9,14 @@ public class Application {
         while (isContinue) {
             BaseballGame baseballGame = new BaseballGame();
             baseballGame.startGame();
-            isContinue = baseballGame.inputGameContinue();
+            isContinue = inputGameContinue();
         }
+    }
+
+    public static boolean inputGameContinue() {
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를  입력하세요.");
+        Scanner scanner = new Scanner(System.in);
+        int inputInt = scanner.nextInt();
+        return inputInt == 1;
     }
 }
