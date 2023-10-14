@@ -16,11 +16,10 @@
   - [ ] 로또 번호 배열을 받아서 분석하고 수익률을 반환하는 기능 구현
   - [ ] 당첨 번호와 보너스 번호 입력을 검사하는 기능
 
-
 - [ ] 게임을 진행하는 객체 구현 - LottoGame
   - [ ] 구입금액 입력 받아서 LottoMachine 에 전달
   - [ ] LottoMachine 에서 나온 로또 배열을 LottoAnalyze에 전달
-  - [ ] LottoAnalyze에서 나온 결과를 출력하는 기능
+  - [ ] LottoAnalyzer에서 나온 결과를 출력하는 기능
   - [ ] 로또 구입 금액 입력을 검사하고 에러 메세지 출력하는 기능
 
 - [ ] 로또 등수 enum 객체 구현 - LottoWin
