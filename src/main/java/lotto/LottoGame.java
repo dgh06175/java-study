@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.List;
+import java.util.*;
 import camp.nextstep.edu.missionutils.*;
 
 public class LottoGame {
@@ -9,13 +9,15 @@ public class LottoGame {
 
     private Lotto winningLotto;
     private int money;
-    private List<Lotto> lottoArray;
+    private ArrayList<Lotto> lottoArray;
 
     public void play() {
         money = inputMoney();
         if (money == INVALID_MONEY) return;
-        System.out.println("입력한 금액은 "+money);
-        //lottoArray = new Lotto(money);
+        int lottoCount = money / LOTTO_PRICE;
+        System.out.println(lottoCount + "개를 구매했습니다.");
+        lottoArray = lottoMachine(lottoCount);
+        printLotto(lottoArray);
     }
 
     private int inputMoney() {
@@ -41,5 +43,20 @@ public class LottoGame {
         }
 
         return parsedMoney;
+    }
+
+    private ArrayList<Lotto> lottoMachine(int lottoCount) {
+        ArrayList<Lotto> lottoArray = new ArrayList<>(lottoCount);
+        for(int i = 0; i<lottoCount; i++) {
+            List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+            lottoArray.add(new Lotto(numbers));
+        }
+        return lottoArray;
+    }
+
+    private void printLotto(ArrayList<Lotto> lottoArray) {
+        for (Lotto lotto : lottoArray) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 }
