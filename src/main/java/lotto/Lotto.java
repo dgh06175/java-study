@@ -8,7 +8,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         validate2(numbers);
-        Collections.sort(numbers);
+        //Collections.sort(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
@@ -24,7 +24,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getNumbers() {
+    public ArrayList<Integer> getNumbers() {
         return new ArrayList<>(numbers);
     }
 }

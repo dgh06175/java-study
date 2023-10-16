@@ -27,7 +27,9 @@ public class LottoGame {
         bonusNumber = inputBonusNumber();
         if (bonusNumber == INVALID_NUMBER) return;
 
-        System.out.println("당첨번호는 "+ winningLotto.getNumbers() + " \n보너스 번호는 " + bonusNumber);
+        //System.out.println("당첨번호는 "+ winningLotto.getNumbers() + " \n보너스 번호는 " + bonusNumber);
+        ArrayList<Integer> result = calculateResult();
+        printResult(result);
     }
 
     private int inputMoney() {
@@ -118,5 +120,68 @@ public class LottoGame {
         if (parsefBonusNumber < 1 || parsefBonusNumber > 45) {
             throw new IllegalArgumentException("[ERROR] 잘못된 보너스 번호 입니다.");
         }
+    }
+
+    private ArrayList<Integer> calculateResult() {
+        ArrayList<Integer> winLottoAry = winningLotto.getNumbers();
+        int _1 = 0, _2 = 0, _3 = 0, _4 = 0, _5 = 0;
+        for(Lotto lotto: lottoArray) {
+            ArrayList<Integer> lottoNumAry = lotto.getNumbers();
+            boolean bonusMatch = lottoNumAry.contains(bonusNumber);
+
+            lottoNumAry.retainAll(winLottoAry);
+            int matchNum = lottoNumAry.size();
+
+            switch (matchNum) {
+                case 3:
+                    _5 += 1;
+                    break;
+                case 4:
+                    _4 += 1;
+                    break;
+                case 5:
+                    if (bonusMatch) _2 += 1;
+                    else _3 += 1;
+                    break;
+                case 6:
+                    _1 += 1;
+                    break;
+            }
+        }
+        return new ArrayList<>(List.of(_1, _2, _3, _4, _5));
+    }
+
+    private void printResult(ArrayList<Integer> result) {
+        System.out.println("\n당첨 통계\n---");
+        int moneyEarn = 0;
+        for(int i = 0; i < result.size(); i++) {
+            int rankNum = result.get(i);
+            switch (i+1) {
+                case 5:
+                    System.out.println("3개 일치 (5,000원) - " + rankNum + "개");
+                    moneyEarn += 5000 * rankNum;
+                    break;
+                case 4:
+                    System.out.println("4개 일치 (50,000원) - " + rankNum + "개");
+                    moneyEarn += 50000 * rankNum;
+                    break;
+                case 3:
+                    System.out.println("5개 일치 (1,500,000원) - " + rankNum + "개");
+                    moneyEarn += 1500000 * rankNum;
+                    break;
+                case 2:
+                    System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + rankNum + "개");
+                    moneyEarn += 30000000 * rankNum;
+                    break;
+                case 1:
+                    System.out.println("6개 일치 (2,000,000,000원) - " + rankNum + "개");
+                    moneyEarn += 2000000000 * rankNum;
+                    break;
+            }
+        }
+        double moneyPercent;
+        if (moneyEarn == 0)  moneyPercent = 0.0;
+        else moneyPercent = moneyEarn / (double) money * 100;
+        System.out.printf("총 수익률은 %.1f%%입니다.\n", moneyPercent);
     }
 }
