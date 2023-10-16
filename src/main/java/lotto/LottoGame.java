@@ -4,8 +4,9 @@ import java.util.*;
 import camp.nextstep.edu.missionutils.*;
 
 public class LottoGame {
-    private static final int INVALID_MONEY = -1;
+    private static final int INVALID_NUMBER = -1;
     private static final int LOTTO_PRICE = 1000;
+    final String LOTTO_REGEX = "[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+";
 
     private Lotto winningLotto;
     private int bonusNumber;
@@ -14,14 +15,18 @@ public class LottoGame {
 
     public void play() {
         money = inputMoney();
-        if (money == INVALID_MONEY) return;
+        if (money == INVALID_NUMBER) return;
         int lottoCount = money / LOTTO_PRICE;
         System.out.println(lottoCount + "개를 구매했습니다.");
         lottoArray = lottoMachine(lottoCount);
         printLotto(lottoArray);
 
         winningLotto = inputWinNumbers();
+        if (winningLotto == null) return;
+
         bonusNumber = inputBonusNumber();
+        if (bonusNumber == INVALID_NUMBER) return;
+
         System.out.println("당첨번호는 "+ winningLotto.getNumbers() + " \n보너스 번호는 " + bonusNumber);
     }
 
@@ -29,14 +34,15 @@ public class LottoGame {
         System.out.println("구입금액을 입력해 주세요.");
         String inputMoney = Console.readLine();
         try {
-            return validateInputMoney(inputMoney);
+            validateInputMoney(inputMoney);
+            return Integer.parseInt(inputMoney);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return INVALID_MONEY;
+            return INVALID_NUMBER;
         }
     }
 
-    private int validateInputMoney(String inputMoney) throws IllegalArgumentException {
+    private void validateInputMoney(String inputMoney) throws IllegalArgumentException {
         int parsedMoney;
         try {
             parsedMoney = Integer.parseInt(inputMoney);
@@ -47,8 +53,6 @@ public class LottoGame {
         if (parsedMoney < 1000) {
             throw new IllegalArgumentException("[ERROR] 1000 미만의 값을 입력했습니다.");
         }
-
-        return parsedMoney;
     }
 
     private ArrayList<Lotto> lottoMachine(int lottoCount) {
@@ -68,7 +72,16 @@ public class LottoGame {
 
     private Lotto inputWinNumbers() {
         System.out.println("\n당첨 번호를 입력해 주세요.");
-        String[] winNumberStringArray = Console.readLine().split(",");
+        String inputWinNumber = Console.readLine();
+
+        try {
+            validateWinNumbers(inputWinNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        String[] winNumberStringArray = inputWinNumber.split(",");
         List<Integer> winNumberIntegerArray = new ArrayList<>(0);
         for(String num: winNumberStringArray) {
             winNumberIntegerArray.add(Integer.parseInt(num));
@@ -76,8 +89,34 @@ public class LottoGame {
         return new Lotto(winNumberIntegerArray);
     }
 
+    private void validateWinNumbers(String inputMoney) throws IllegalArgumentException {
+        if (!inputMoney.matches(LOTTO_REGEX)) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호 입력 형식이 잘못되었습니다.");
+        }
+        // 1~45 검사 로직 추가
+    }
+
     private int inputBonusNumber() {
         System.out.println("\n보너스 번호를 입력해 주세요.");
-        return Integer.parseInt(Console.readLine());
+        String bonusNumberString = Console.readLine();
+        try {
+            validateBonusNumber(bonusNumberString);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            return INVALID_NUMBER;
+        }
+        return Integer.parseInt(bonusNumberString);
+    }
+
+    private void validateBonusNumber(String bonusNumberString) {
+        int parsefBonusNumber;
+        try {
+            parsefBonusNumber = Integer.parseInt(bonusNumberString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 잘못된 보너스 번호 형식입니다.");
+        }
+        if (parsefBonusNumber < 1 || parsefBonusNumber > 45) {
+            throw new IllegalArgumentException("[ERROR] 잘못된 보너스 번호 입니다.");
+        }
     }
 }
