@@ -8,6 +8,7 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
 
     private Lotto winningLotto;
+    private int bonusNumber;
     private int money;
     private ArrayList<Lotto> lottoArray;
 
@@ -18,9 +19,14 @@ public class LottoGame {
         System.out.println(lottoCount + "개를 구매했습니다.");
         lottoArray = lottoMachine(lottoCount);
         printLotto(lottoArray);
+
+        winningLotto = inputWinNumbers();
+        bonusNumber = inputBonusNumber();
+        System.out.println("당첨번호는 "+ winningLotto.getNumbers() + " \n보너스 번호는 " + bonusNumber);
     }
 
     private int inputMoney() {
+        System.out.println("구입금액을 입력해 주세요.");
         String inputMoney = Console.readLine();
         try {
             return validateInputMoney(inputMoney);
@@ -58,5 +64,20 @@ public class LottoGame {
         for (Lotto lotto : lottoArray) {
             System.out.println(lotto.getNumbers());
         }
+    }
+
+    private Lotto inputWinNumbers() {
+        System.out.println("\n당첨 번호를 입력해 주세요.");
+        String[] winNumberStringArray = Console.readLine().split(",");
+        List<Integer> winNumberIntegerArray = new ArrayList<>(0);
+        for(String num: winNumberStringArray) {
+            winNumberIntegerArray.add(Integer.parseInt(num));
+        }
+        return new Lotto(winNumberIntegerArray);
+    }
+
+    private int inputBonusNumber() {
+        System.out.println("\n보너스 번호를 입력해 주세요.");
+        return Integer.parseInt(Console.readLine());
     }
 }
