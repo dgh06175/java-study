@@ -8,7 +8,6 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         validate2(numbers);
-        //Collections.sort(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
