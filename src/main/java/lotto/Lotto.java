@@ -23,7 +23,27 @@ public class Lotto {
         }
     }
 
+    public boolean contain(int num) {
+        return numbers.contains(num);
+    }
+
     public ArrayList<Integer> getNumbers() {
         return new ArrayList<>(numbers);
+    }
+
+    public LottoRank match(Lotto matchLotto, int bonusNumber) {
+        boolean isBonusMatch = matchLotto.contain(bonusNumber);
+        int matchCount = 0;
+        for (int num : matchLotto.getNumbers()) {
+            if (numbers.contains(num)) matchCount++;
+        }
+        if (matchCount == 3) return LottoRank.FIFTH;
+        if (matchCount == 4) return LottoRank.FORTH;
+        if (matchCount == 5) {
+            if (isBonusMatch) return LottoRank.SECOND;
+            return LottoRank.THRID;
+        }
+        if (matchCount == 6) return LottoRank.FIRST;
+        return LottoRank.NONE;
     }
 }
