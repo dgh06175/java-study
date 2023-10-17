@@ -3,11 +3,12 @@ package lotto;
 import java.text.DecimalFormat;
 
 enum LottoRank {
-    FIRST(6, false, 2000000000),
-    SECOND(5, true, 30000000),
-    THRID(5, false, 1500000),
+    FIFTH(3, false, 5000),
     FORTH(4, false, 50000),
-    FIFTH(3, false, 5000);
+    THRID(5, false, 1500000),
+    SECOND(5, true, 30000000),
+    FIRST(6, false, 2000000000),
+    NONE(0, false, 0);
 
     private final int match;
     private final boolean isBonusMatch;
@@ -32,7 +33,9 @@ enum LottoRank {
         return price;
     }
 
-    void printRankInfo() {
-        System.out.println(match + "개 일치 (" + formatter.format(price) + "원)");
+    String returnRankInfo(int count) {
+        if (match == 0) return "";
+        if (isBonusMatch) return match + "개 일치, 보너스 볼 일치 (" + formatter.format(price).trim() + "원) - " + count + "개";
+        return match + "개 일치 (" + formatter.format(price).trim() + "원) - " + count + "개";
     }
 }
