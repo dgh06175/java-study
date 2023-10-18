@@ -8,18 +8,23 @@ public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     final String LOTTO_REGEX = "[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+";
 
+    private LottoMachine lottoMachine;
     private Lotto winningLotto;
     private int bonusNumber;
     private int money;
     private ArrayList<Lotto> lottoArray;
+
+    public LottoGame() {
+        lottoMachine = new LottoMachine();
+    }
 
     public void play() {
         money = inputMoney();
         if (money == INVALID_NUMBER) return;
         int lottoCount = money / LOTTO_PRICE;
         System.out.println(lottoCount + "개를 구매했습니다.");
-        lottoArray = lottoMachine(lottoCount);
-        printLotto(lottoArray);
+        lottoArray = lottoMachine.generateLotto(lottoCount);
+        lottoMachine.printLotto(lottoArray);
 
         winningLotto = inputWinNumbers();
         if (winningLotto == null) return;
@@ -53,21 +58,6 @@ public class LottoGame {
 
         if (parsedMoney < 1000) {
             throw new IllegalArgumentException("[ERROR] 1000 미만의 값을 입력했습니다.");
-        }
-    }
-
-    private ArrayList<Lotto> lottoMachine(int lottoCount) {
-        ArrayList<Lotto> lottoArray = new ArrayList<>(lottoCount);
-        for(int i = 0; i<lottoCount; i++) {
-            List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
-            lottoArray.add(new Lotto(numbers));
-        }
-        return lottoArray;
-    }
-
-    private void printLotto(ArrayList<Lotto> lottoArray) {
-        for (Lotto lotto : lottoArray) {
-            System.out.println(lotto.getNumbers());
         }
     }
 
