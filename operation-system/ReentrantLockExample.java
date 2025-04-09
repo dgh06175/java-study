@@ -1,6 +1,6 @@
 import java.util.concurrent.locks.*;
 
-public class Main {
+public class ReentrantLockExample {
     static final int MAX = 100000;
     static int sharedData = 0;
     static Lock lock = new ReentrantLock();
@@ -14,6 +14,7 @@ public class Main {
 
         try {
             thread1.join();
+            thread2.join();
         } catch (InterruptedException e) {
             System.out.println(e.getLocalizedMessage());
         }
