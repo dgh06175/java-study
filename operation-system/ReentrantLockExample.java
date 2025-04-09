@@ -1,11 +1,13 @@
 import java.util.concurrent.locks.*;
 
 public class ReentrantLockExample {
-    static final int MAX = 100000;
+    static final int MAX = 10_000_000;
     static int sharedData = 0;
     static Lock lock = new ReentrantLock();
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime(); // 시간 측정 시작
+
         Thread thread1 = new Thread(new Increment());
         Thread thread2 = new Thread(new Decrement());
 
@@ -18,6 +20,10 @@ public class ReentrantLockExample {
         } catch (InterruptedException e) {
             System.out.println(e.getLocalizedMessage());
         }
+
+        long endTime = System.nanoTime(); // 시간 측정 끝
+        long duration = endTime - startTime; // 걸린 시간 (나노초 단위)
+        System.out.println("Execution Time: " + duration / 1_000_000 + " ms");
         System.out.println("Final value of sharedData: " + sharedData);
     }
 

@@ -1,9 +1,6 @@
-import java.util.concurrent.Semaphore;
-
-public class SemaphoreExample {
+public class CocurrentExample {
     static final int MAX = 10_000_000;
     static int sharedData = 0;
-    static Semaphore semaphore = new Semaphore(1);
 
     public static void main(String[] args) {
         long startTime = System.nanoTime(); // 시간 측정 시작
@@ -30,14 +27,7 @@ public class SemaphoreExample {
     static class Increment implements Runnable {
         public void run() {
             for (int i = 0; i < MAX; i++) {
-                try {
-                    semaphore.acquire();
-                    sharedData++;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    semaphore.release();
-                }
+                sharedData++;
             }
         }
     }
@@ -45,14 +35,7 @@ public class SemaphoreExample {
     static class Decrement implements Runnable {
         public void run() {
             for (int i = 0; i < MAX; i++) {
-                try {
-                    semaphore.acquire();
-                    sharedData--;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    semaphore.release();
-                }
+                sharedData--;
             }
         }
     }
