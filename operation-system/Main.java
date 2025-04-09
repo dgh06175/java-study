@@ -1,6 +1,9 @@
+import java.util.concurrent.locks.*;
+
 public class Main {
     static final int MAX = 100000;
     static int sharedData = 0;
+    static Lock lock = new ReentrantLock();
 
     public static void main(String[] args) {
         Thread thread1 = new Thread(new Increment());
@@ -20,7 +23,12 @@ public class Main {
     static class Increment implements Runnable {
         public void run() {
             for (int i = 0; i < MAX; i++) {
-                sharedData++;
+                lock.lock();
+                try {
+                    sharedData++;
+                } finally {
+                    lock.unlock();
+                }
             }
         }
     }
@@ -28,7 +36,12 @@ public class Main {
     static class Decrement implements Runnable {
         public void run() {
             for (int i = 0; i < MAX; i++) {
-                sharedData--;
+                lock.lock();
+                try {
+                    sharedData--;
+                } finally {
+                    lock.unlock();
+                }
             }
         }
     }
